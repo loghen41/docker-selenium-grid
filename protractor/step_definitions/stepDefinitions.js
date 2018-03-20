@@ -29,8 +29,8 @@ When('I wait for {int} seconds', function(number) {
 	return browser.sleep(number * 1000);
 });
 
-Then('The element {element} should contain {string}', function(local_element, string) {
-	let found_element = element(by.id(local_element));
-	found_element.getText();
-	return found_element.indexOf(string) !== -1
+Then('The element {string} should contain {string}', function(local_element, string) {
+	return new Promise(function (resolve, reject) {
+		reject("Forced failure")
+	})
 });
