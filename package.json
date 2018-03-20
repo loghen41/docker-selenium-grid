@@ -1,0 +1,24 @@
+{
+  "name": "docker_selenium_grid",
+  "version": "1.0.0",
+  "description": "Test repo to review selenium grid breaking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loghen41/docker-selenium-grid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loghen41/docker-selenium-grid/issues"
+  },
+  "homepage": "https://github.com/loghen41/docker-selenium-grid#readme",
+  "dependencies": {
+    "protractor": "^5.3.0",
+    "protractor-cucumber-framework": "^4.2.0"
+  },
+  "devDependencies": {}
+}
