@@ -68,3 +68,4 @@ Feature: Load Test
       When I enter "asdf" into the search bar
       When I clear the search bar
       When I wait for 5 seconds
+        Then The element not_real_element should contain Missing Text

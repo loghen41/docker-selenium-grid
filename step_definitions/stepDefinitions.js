@@ -28,3 +28,9 @@ When('I clear the search bar', function() {
 When('I wait for {int} seconds', function(number) {
 	return browser.sleep(number * 1000);
 });
+
+Then('The element {element} should contain {string}', function(local_element, string) {
+	let found_element = element(by.id(local_element));
+	found_element.getText();
+	return found_element.indexOf(string) !== -1
+});
