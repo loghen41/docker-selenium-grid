@@ -1,0 +1,11 @@
+hub:
+  image: selenium/hub:${GRID_VERSION}
+  ports:
+    - "4444:4444"
+  environment:
+    - GRID_TIMEOUT=1800
+chrome:
+  image: selenium/node-chrome:${GRID_VERSION}
+  links:
+    - hub
+  shm_size: 128M
