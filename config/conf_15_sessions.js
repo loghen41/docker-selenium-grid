@@ -13,7 +13,7 @@ exports.config = {
 	specs: [ path + '/features/**/*.feature' ],
 
 	cucumberOpts: {
-		format: ['json:' + path + '/results.json', "pretty"],
+		format: 'json:results.json',
 		require: [ path + '/step_definitions/**/*.js' ]
 	},
 
@@ -21,6 +21,6 @@ exports.config = {
 		'browserName': 'chrome',
 		'loggingPrefs': {'driver': 'INFO', 'browser': 'INFO'},
 		shardTestFiles: true,
-		maxInstances: 6
+		maxInstances: 15
 	}
 };
