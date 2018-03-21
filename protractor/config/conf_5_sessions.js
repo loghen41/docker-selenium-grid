@@ -13,7 +13,6 @@ exports.config = {
 	specs: [ path + '/features/**/*.feature' ],
 
 	cucumberOpts: {
-		format: 'json:results.json',
 		require: [ path + '/step_definitions/**/*.js' ]
 	},
 
