@@ -12,13 +12,13 @@ exports.config = {
 	// require feature files
 	specs: [ path + '/features/**/*.feature' ],
 
-	cucumberOpts: {
-		format: ['json:/results.json', "pretty"],
-		require: [ path + '/step_definitions/**/*.js' ]
-	},
-
 	capabilities: {
 		'browserName': 'chrome',
 		'loggingPrefs': {'driver': 'INFO', 'browser': 'INFO'},
+	},
+
+	cucumberOpts: {
+		format: ["json:results.json"],
+		require: [ path + '/step_definitions/**/*.js' ]
 	}
 };

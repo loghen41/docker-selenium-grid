@@ -13,8 +13,9 @@ exports.config = {
 	specs: [ path + '/features/shardTest/**/*.feature' ],
 
 	cucumberOpts: {
+		format: ["json:results.json"],
 		require: [ path + '/step_definitions/**/*.js' ],
-		tags: ["@Shard2"]
+		ags: ["@Shard2"]
 	},
 
 	capabilities: {
