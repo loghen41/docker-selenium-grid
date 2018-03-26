@@ -3,10 +3,15 @@ hub:
   ports:
     - "4444:4444"
   environment:
-    - GRID_TIMEOUT=30000
-    - GRID_MAX_SESSION=${NUM_SESSIONS}
+    - GRID_TIMEOUT=30
+    - GRID_MAX_SESSION=6
+    - GRID_BROWSER_TIMEOUT=30
 chrome:
   image: selenium/node-chrome:${GRID_VERSION}
   links:
     - hub
-  shm_size: 128M
+  environment:
+    - NODE_MAX_SESSION=1
+    - NODE_MAX_INSTANCES=1
+  volumes:
+    - /dev/shm:/dev/shm

@@ -3,8 +3,7 @@
 source ./.env
 
 start() {
-    docker-compose up -d
-    docker-compose scale chrome=$NUM_SESSIONS
+    docker-compose up --scale chrome=$NUM_SESSIONS -d
 }
 
 stop() {

@@ -15,7 +15,7 @@ exports.config = {
 	cucumberOpts: {
 		format: ["json:results.json"],
 		require: [ path + '/step_definitions/**/*.js' ],
-		ags: ["@Shard2"]
+		tags: ["@Shard2"]
 	},
 
 	capabilities: {
