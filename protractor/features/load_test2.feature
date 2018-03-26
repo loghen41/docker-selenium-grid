@@ -1,5 +1,6 @@
 Feature: Load Test
 
+  @TestShard
   Scenario: Google Test 3
     Given I navigate to google
     When I enter "fdsa" into the search bar
