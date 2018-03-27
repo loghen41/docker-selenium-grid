@@ -17,7 +17,8 @@ Grid Initialization:
 grid.sh start`
 
 Protractor Tests:
-`cd protractor
+`npm install
+cd protractor
 protractor config/conf_{num}_sessions.js`
 
 Behave Tests:

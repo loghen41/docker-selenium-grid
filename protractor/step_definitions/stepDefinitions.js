@@ -1,9 +1,9 @@
-let stepDefinitionFunctions =	require("./stepDefinitionFunctions.js");
-let util =						require("./util.js");
+const stepDefinitionFunctions = require("./stepDefinitionFunctions.js");
+const util = require("./util.js");
 
 /*
 // Protractor-Cucumber-Framework 4.2.0 setup
-const { Before, Given, When, Then, setDefaultTimeout } = require('cucumber');
+const { After, Before, Given, When, Then, setDefaultTimeout } = require('cucumber');
 
 let globalTimeout = 30;
 let pageLoadTimeout = 30;
@@ -14,6 +14,20 @@ Before(function() {
 	browser.ignoreSynchronization = true;
 	browser.manage().timeouts().implicitlyWait(globalTimeout * milliseconds);
 	browser.manage().timeouts().pageLoadTimeout(pageLoadTimeout * milliseconds);
+});
+
+After(function (scenario, callback) {
+	stepDefinitionFunctions.browser_clearStorage({})
+		.then(function() {
+			util.takeScreenShot({})
+				.then(function() {
+					callback();
+				}).catch(function(error) {
+				callback("Error taking screenshot: " + error);
+			});
+		}).catch(function(error) {
+		callback("test cleanup: error clearing storage: " + error);
+	});
 });
 
 Given('I navigate to google', function() {
@@ -41,7 +55,6 @@ Then('The element {string} should contain {string}', function(local_element, str
 });
 
 */
-
 // Protractor-Cucumber-Framework 3.1.0 setup
 let stepDefinitionsWrapper = function () {
 	let globalTimeout = 30;
@@ -83,10 +96,7 @@ let stepDefinitionsWrapper = function () {
 		}
 	});
 
-
-	/**
-	 * What to run after each scenario
-	 */
+	//  What to run after each scenario
 	this.After(function (scenario, callback) {
 		stepDefinitionFunctions.browser_clearStorage({})
 			.then(function() {
