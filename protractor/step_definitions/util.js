@@ -2,39 +2,81 @@ let fileSystem = 			require("fs.extra");
 
 // let screenshotDirectory = "screenshots/";
 
+
+module.exports.referenceError = function () {
+	return new Promise(function(resolve, reject) {
+		let error = new ReferenceError("Test Reference Error");
+		reject("Forced Reference Error" + error);
+	})
+};
+
+module.exports.takeScreenShot = function() {
+	return new Promise(function(resolve, reject) {
+		let makePass = true;
+
+		if (makePass) {
+
+			setTimeout(function() {
+				resolve();
+				return;
+			}, 5000)
+		}
+		else {
+			setTimeout(function() {
+				let error = new Error("Test Error");
+				reject("Forced Error" + error);
+				return;
+			}, 50000)
+		}
+	})
+};
+
+/*
+
 module.exports.takeScreenShot = function(parameters){
 
 	return new Promise( function(resolve, reject) {
 		let screenshotFlag = true;
+		let directoryExists = false;
 
 		if(screenshotFlag) {
-			// Create Directory
-			let onDirectoryCheck = function(exists) {
-				let takeScreenshot = function() {
-					browser.takeScreenshot().then(function(png) {
+			try {
+				directoryExists = fileSystem.existsSync(screenshotDirectory);
+			}
+			catch(error) {
+				reject(error);
+				return;
+			}
+
+			if (! directoryExists) {
+				try {
+					fileSystem.mkdir(screenshotDirectory);
+				}
+				catch(error) {
+					reject(error);
+					return;
+				}
+			}
+
+			browser.takeScreenshot().then(function(png) {
 						let outputName = getDateAsString({}) + ".png";
 						let stream = fileSystem.createWriteStream(screenshotDirectory + outputName);
 						stream.write(new Buffer(png, "base64"));
 						stream.end();
 						resolve();
-					}).catch(function() {
-						reject();
+						return;
+					}).catch(function(error) {
+						reject(error);
+						return;
 					});
-				};
-				if(exists === false) {
-					fileSystem.mkdir(screenshotDirectory, takeScreenshot);
-				}
-				else {
-					takeScreenshot();
-				}
-			};
-			fileSystem.exists(screenshotDirectory, onDirectoryCheck);
 		}
 		else {
 			resolve();
 		}
 	});
 };
+
+*/
 
 function getDateAsString(parameters) {
 	let date = new Date();

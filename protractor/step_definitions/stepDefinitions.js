@@ -1,9 +1,8 @@
 const stepDefinitionFunctions = require("./stepDefinitionFunctions.js");
 const util = require("./util.js");
 
-/*
 // Protractor-Cucumber-Framework 4.2.0 setup
-const { After, Before, Given, When, Then, setDefaultTimeout } = require('cucumber');
+const { AfterAll, After, Before, Given, When, Then, setDefaultTimeout } = require('cucumber');
 
 let globalTimeout = 30;
 let pageLoadTimeout = 30;
@@ -16,18 +15,14 @@ Before(function() {
 	browser.manage().timeouts().pageLoadTimeout(pageLoadTimeout * milliseconds);
 });
 
-After(function (scenario, callback) {
-	stepDefinitionFunctions.browser_clearStorage({})
-		.then(function() {
-			util.takeScreenShot({})
-				.then(function() {
-					callback();
-				}).catch(function(error) {
-				callback("Error taking screenshot: " + error);
-			});
-		}).catch(function(error) {
-		callback("test cleanup: error clearing storage: " + error);
-	});
+//  What to run after each scenario
+After(function () {
+	return util.takeScreenShot();
+});
+
+//  What to run after each scenario
+After(function () {
+	return stepDefinitionFunctions.browser_clearStorage();
 });
 
 Given('I navigate to google', function() {
@@ -44,6 +39,27 @@ When('I clear the search bar', function() {
 	return search_bar.clear();
 });
 
+When('I fail on a promise', function() {
+	return new Promise(function(resolve, reject) {
+		let makePass = false;
+
+		if (makePass) {
+
+			setTimeout(function() {
+				resolve();
+				return;
+			}, 3000)
+		}
+		else {
+			setTimeout(function() {
+				let error = new Error("Test Error");
+				reject("Forced Error" + error);
+				return;
+			}, 3000)
+		}
+	})
+});
+
 When('I wait for {int} seconds', function(number) {
 	return browser.sleep(number * 1000);
 });
@@ -54,7 +70,7 @@ Then('The element {string} should contain {string}', function(local_element, str
 	})
 });
 
-*/
+/*
 // Protractor-Cucumber-Framework 3.1.0 setup
 let stepDefinitionsWrapper = function () {
 	let globalTimeout = 30;
@@ -76,40 +92,25 @@ let stepDefinitionsWrapper = function () {
 		browser.manage().timeouts().pageLoadTimeout(pageLoadTimeout * milliseconds);
 	});
 
-	this.StepResult(function(event, callback) {
-
-		// Get Step Result
-		let result = event.getPayloadItem('stepResult');
-		let status = result.getStatus();
-
-		// Only Reset if skipped
-		if(status === "skipped") {
-			// Reset Call Stack
-			browser.executeScript("setTimeout(function() {}, 0);")
-				.then(callback)
-				.catch(function(error) {
-					callback("Error resetting call stack: " + error);
-				});
-		}
-		else {
-			callback();
-		}
+	//  What to run after each scenario
+	this.After(function () {
+		return util.takeScreenShot({});
 	});
 
 	//  What to run after each scenario
-	this.After(function (scenario, callback) {
-		stepDefinitionFunctions.browser_clearStorage({})
-			.then(function() {
-				util.takeScreenShot({})
-					.then(function() {
-						callback();
-					}).catch(function(error) {
-					callback("Error taking screenshot: " + error);
-				});
-			}).catch(function(error) {
-			callback("test cleanup: error clearing storage: " + error);
-		});
+	this.After(function () {
+		return stepDefinitionFunctions.browser_clearStorage({});
 	});
+
+	// this.After(function () {
+	// 	return stepDefinitionFunctions.browser_clearStorage({})
+	// 		.then(function() {
+	// 			return util.takeScreenShot({})
+	// 		})
+	// 		.catch(function(error) {
+	//
+	// 		})
+	// });
 
 	this.Given(/^I navigate to google$/, function() {
 		return browser.get("https:/google.com")
@@ -137,3 +138,4 @@ let stepDefinitionsWrapper = function () {
 };
 
 module.exports = stepDefinitionsWrapper;
+*/
