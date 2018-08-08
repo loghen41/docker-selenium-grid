@@ -10,17 +10,17 @@ exports.config = {
 	frameworkPath: require.resolve('protractor-cucumber-framework'),
 
 	// require feature files
-	specs: [ path + '/features/**/*.feature' ],
+	specs: [ path + '/features/5featuretest/*.feature' ],
 
 	capabilities: {
 		'browserName': 'chrome',
 		'loggingPrefs': {'driver': 'INFO', 'browser': 'INFO'},
 		shardTestFiles: true,
-		maxInstances: 5
+		maxInstances: 4
 	},
 
 	cucumberOpts: {
-		format: ["json:results.json"],
+		format: ["json:results.json", `../node_modules/cucumber-pretty`],
 		require: [ path + '/step_definitions/**/*.js' ]
 	}
 };

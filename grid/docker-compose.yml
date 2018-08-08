@@ -11,7 +11,7 @@ chrome:
   links:
     - hub
   environment:
-    - NODE_MAX_SESSION=1
+    - NODE_MAX_SESSION=3
     - NODE_MAX_INSTANCES=1
   volumes:
     - /dev/shm:/dev/shm

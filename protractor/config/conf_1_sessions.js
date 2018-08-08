@@ -18,7 +18,7 @@ exports.config = {
 	},
 
 	cucumberOpts: {
-		format: ["json:results.json"],
+		format: ["json:results.json", `../node_modules/cucumber-pretty`],
 		require: [ path + '/step_definitions/**/*.js' ]
 	}
 };

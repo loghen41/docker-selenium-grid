@@ -10,7 +10,7 @@ exports.config = {
 	frameworkPath: require.resolve('protractor-cucumber-framework'),
 
 	// require feature files
-	specs: [ path + '/features/**/*.feature' ],
+	specs: [ path + '/features/20featuretest/*.feature' ],
 
 	cucumberOpts: {
 		format: ["json:results.json"],
