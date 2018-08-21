@@ -26,7 +26,10 @@ After(function () {
 });
 
 Given('I navigate to google', function() {
-	return browser.get("https:/google.com")
+	return new Promise(function (resolve, reject) {
+		reject("Cucumber/Protractor Failing tests")
+	});
+	// return browser.get("https:/google.com")
 });
 
 When('I enter {string} into the search bar', function(text) {
